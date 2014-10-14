@@ -1,3 +1,8 @@
+.container {
+	display: flex;
+	flex-direction: row;
+}
+
 paper-button {
   margin: 1em;
   width: 10em;
