@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RunTracker</title>
+
+<script src="packages/web_components/dart_support.js"></script>
+
+<link rel="import" href="runcontent.html" />
+<link rel="import" href="packages/core_elements/core_header_panel.html">
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="stylesheet" href="runtracker.css">
+
+</head>
+<body unresolved fullbleed layout vertical>
+
+  <core-header-panel flex>
+    <core-toolbar>
+      <div>RunTracker</div>
+    </core-toolbar>
+    
+    <div class="content">
+    	<run-content></run-content>
+    </div>
+
+  </core-header-panel>
+  
+  <script type="application/dart">export 'package:polymer/init.dart';</script>
+</body>
+</html>

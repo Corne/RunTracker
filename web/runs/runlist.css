@@ -1,0 +1,15 @@
+paper-item #ripple,
+paper-item::shadow #ripple {
+		color: #3367d6;
+}
+
+.core-selected {
+  background: #eee;
+  color: #4285f4;
+}
+
+.statistics {
+	float: left;
+	width: 200px;
+	margin-left: 1em;	
+}

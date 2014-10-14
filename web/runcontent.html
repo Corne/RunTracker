@@ -1,0 +1,27 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="runs/runoverview.html" />
+<link rel="import" href="races/raceoverview.html" />
+<link rel="import" href="races/racedetails.html" />
+
+<polymer-element name="run-content">
+	<template>
+		<!-- TODO check out flex css -->
+   	<div style="float: left">
+   		<run-overview></run-overview>
+   	</div>
+
+   	<div style="float: right">
+   		<race-overview selected="{{selectedRace}}"></race-overview>
+   	</div>
+   	
+   	<div style="display: block">
+   		<race-details raceid="{{selectedRace+1}}"></race-details>
+   	</div>
+   	
+   	<div style="clear: both">
+   	</div>
+	</template>
+	
+	<script type="application/dart" src="runcontent.dart" ></script>
+</polymer-element>
+

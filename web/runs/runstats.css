@@ -1,0 +1,23 @@
+table {
+		border-collapse: collapse;
+}
+
+td {
+  border-bottom: 1px solid #000;	
+  padding-top:2em;
+  padding-bottom:8px;
+ 
+}
+
+
+ul {
+		list-style-type: none;
+}
+
+ul li {
+		border-bottom: 1px solid #000;	
+		margin-top: 2em;
+		padding-bottom: 8px;
+}
+
+

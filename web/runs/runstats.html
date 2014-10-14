@@ -1,0 +1,15 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_item.html">
+
+<polymer-element name="run-stats" attributes="run">
+	<template>
+		<link rel="stylesheet" href="runstats.css">
+				
+		<ul>
+			<li>{{averageSpeed}}</li>
+			<li>{{averageKilometerTime}}</li>
+		</ul>
+	</template>
+	
+	<script type="application/dart" src="runstats.dart" ></script>
+</polymer-element>

@@ -1,0 +1,19 @@
+<link rel="import" href="packages/polymer/polymer.html">
+
+<polymer-element name="race-details" attributes="raceid">
+	<template>
+		<link rel="stylesheet" href="racedetails.css">
+		
+		<div>{{raceid}}</div>
+		
+		<template bind if="{{race != null}}">
+			<h1>{{race.name}}</h1>
+			<div class="content">
+				<img _src="{{race.course.map}}" />
+			</div>
+		</template>
+		
+	
+	  <script type="application/dart" src="racedetails.dart"></script>
+	</template>
+</polymer-element>

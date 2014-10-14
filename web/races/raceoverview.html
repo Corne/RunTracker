@@ -1,0 +1,18 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_selector.html">
+<link rel="import" href="packages/paper_elements/paper_item.html">
+
+<polymer-element name="race-overview" attributes="selected">
+	<template>
+		
+		<core-selector selected="{{selected}}">
+			<template repeat="{{race in data}}">
+				<paper-item>
+					{{race.name}}
+				</paper-item>
+			</template>
+		</core-selector>
+	
+    <script type="application/dart" src="raceoverview.dart"></script>
+  </template>
+</polymer-element>
