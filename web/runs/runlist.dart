@@ -7,7 +7,6 @@ import '../models/run.dart';
 class RunList extends PolymerElement {
 
 	@published ObservableList<RunViewModel> data;
-
 	@observable int selectedIndex;
 
 	RunList.created() : super.created() {
