@@ -6,20 +6,20 @@
 	<template>
 		<link rel="stylesheet" href="runlist.css">
 		
-		
-		<core-selector class="statistics" selected="{{selectedDistance}}">
-			<template repeat="{{distance in distances}}">
-				<paper-item>{{distance}}</paper-item>
-			</template>
-		</core-selector>
-		
-		<core-selector class="statistics" selected="{{selectedIndex}}">
-			<template repeat="{{viewmodel in results}}">
-				<paper-item>{{viewmodel.result}}</paper-item>
-			</template>
-		</core-selector>
+		<div class="container">
+			<core-selector class="statistics" selected="{{selectedDistance}}">
+				<template repeat="{{distance in distances}}">
+					<paper-item>{{distance}}</paper-item>
+				</template>
+			</core-selector>
+			
+			<core-selector class="statistics" selected="{{selectedIndex}}">
+				<template repeat="{{viewmodel in results}}">
+					<paper-item>{{viewmodel.result}}</paper-item>
+				</template>
+			</core-selector>
+		</div>
 
-		<div style="float: clear"></div>
 		<script type="application/dart" src="runlist.dart" ></script>
 	</template>
 </polymer-element>

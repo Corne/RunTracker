@@ -8,8 +8,11 @@ paper-item::shadow #ripple {
   color: #4285f4;
 }
 
+.container {
+	display: flex;
+}
+
 .statistics {
-	float: left;
 	width: 200px;
 	margin-left: 1em;	
 }
