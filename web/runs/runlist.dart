@@ -10,6 +10,7 @@ class RunList extends PolymerElement {
 	@observable int selectedIndex;
 
 	RunList.created() : super.created() {
+		data = new ObservableList();
 		viewmodels = new ObservableMap();
 	}
 
@@ -34,7 +35,7 @@ class RunList extends PolymerElement {
 		}
 	}
 
-	@ComputedProperty("data")
+	@ComputedProperty("data.length")
 	Set<String> get distances {
 		if (data != null) {
 			return data.map((vm) => vm.distance).toSet();

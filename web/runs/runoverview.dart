@@ -9,7 +9,7 @@ class RunOverview extends PolymerElement {
 	@published String modelId;
 
 	//@observable Run run;
-	@observable ObservableList<RunViewModel> items;
+	//@observable ObservableList<RunViewModel> items;
 
 	@observable String name = 'hello';
 
@@ -21,8 +21,16 @@ class RunOverview extends PolymerElement {
 	@observable RunList runlist;
 
 	RunOverview.created() : super.created() {
-		items = new ObservableList();
-
+		//items = new ObservableList();
+	}
+	
+	@override
+	void domReady() {
+		var temp = this.shadowRoot.querySelector("#runlist");
+		runlist = temp;
+		
+		
+		
 		//test data
 		Distance distance = new Distance(5.0);
 		Run run1 = new Run(new Timespan(minutes: 30, seconds: 5), distance);
@@ -37,15 +45,8 @@ class RunOverview extends PolymerElement {
 						distance,
 						date: new DateTime(2014, 8, 12));
 
-		//run = run2;
-		items.addAll(
+		runlist.data.addAll(
 				[new RunViewModel(run1), new RunViewModel(run2), new RunViewModel(run3)]);
-	}
-	
-	@override
-	void domReady() {
-		var temp = this.shadowRoot.querySelector("#runlist");
-		runlist = temp;
 	}
 
 	bool get itemSelected => run != null;
@@ -61,15 +62,16 @@ class RunOverview extends PolymerElement {
 	void testClick() {
 		Timespan time =
 				new Timespan(
-						hours: toInteger(tempHours),
-						minutes: toInteger(tempMinutes),
-						seconds: toInteger(tempSeconds));
+						hours: 0,
+						minutes: 29,
+						seconds: 6);
 
 		Distance distance = new Distance(6.5);
 
-		items.add(new RunViewModel(new Run(time, distance)));
+		runlist.data.add(new RunViewModel(new Run(time, distance)));
 	}
 
+	
 	int toInteger(String value) {
 		if (value == null || value.isEmpty) {
 			return 0;

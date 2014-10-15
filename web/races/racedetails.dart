@@ -25,6 +25,4 @@ class RaceDetails extends PolymerElement {
 			: super.created();
 
 
-	String get image =>
-			"http://www.montferlandrun.nl/images/made/uploads/Plattegrond_MR2_500_405_80.JPG";
 }

@@ -6,11 +6,12 @@
 
 <polymer-element name="run-overview">
 	<template>
+		<link rel="stylesheet" href="../styles/default.css">
 		<link rel="stylesheet" href="runoverview.css">
 
 		<div class="container">
 			<div>
-				<run-list id="runlist" data="{{items}}"></run-list>
+				<run-list id="runlist"></run-list>
 			</div>
 			
 			<div style="margin: 1em">
@@ -29,6 +30,9 @@
 	
 			<paper-button raisedButton class="colored" label="Add" on-click="{{testClick}}"></paper-button>
 		</div>-->
+		
+		<paper-button class="colored" label="add" on-click="{{testClick}}"></paper-button>
+		<paper-button class="colored" label="add" raisedButton></paper-button>
 	</template>
 	<script type="application/dart" src="runoverview.dart" ></script>
 </polymer-element>
