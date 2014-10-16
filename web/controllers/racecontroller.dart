@@ -1,4 +1,5 @@
-library controllers;
+library controllers.racecontroller;
+
 import '../models/race.dart';
 import '../models/run.dart' show Distance;
 

@@ -2,28 +2,39 @@ library runlist;
 
 import 'package:polymer/polymer.dart';
 import '../models/run.dart';
+import '../controllers/runcontroller.dart';
 
 @CustomTag('run-list')
 class RunList extends PolymerElement {
 
-	@published ObservableList<RunViewModel> data;
-	@observable int selectedIndex;
+	final RunController _controller = new RunController();
 
-	RunList.created() : super.created() {
-		data = new ObservableList();
+	@observable ObservableList<RunViewModel> data;
+	@observable int selectedResult;
+	@observable int selectedDistance;
+
+	RunList.created()
+			: super.created() {
 		viewmodels = new ObservableMap();
+
+		var runs = _controller.getAll().map((r) => new RunViewModel(r));
+		data = new ObservableList.from(runs);
 	}
 
 	Run get selectedItem {
-		if (selectedIndex == null) {
-			return null; 
+		if (selectedResult == null) {
+			return null;
 		} else {
-			return results.elementAt(selectedIndex).run;
+			return results.elementAt(selectedResult).run;
 		}
 	}
 
 	ObservableMap<String, Iterable<RunViewModel>> viewmodels;
 
+	void add(Run run){
+		this.data.add(new RunViewModel(run));
+	}
+	
 	void orderByDistance() {
 		this.orderBy((vm) => vm.distance);
 	}
@@ -37,13 +48,8 @@ class RunList extends PolymerElement {
 
 	@ComputedProperty("data.length")
 	Set<String> get distances {
-		if (data != null) {
-			return data.map((vm) => vm.distance).toSet();
-		}
-		return new Set();
+		return data.map((vm) => vm.distance).toSet();
 	}
-
-	@observable int selectedDistance;
 
 	@ComputedProperty("selectedDistance")
 	Iterable<RunViewModel> get results {

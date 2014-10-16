@@ -3,14 +3,16 @@ library runmodels;
 import 'package:intl/intl.dart' show DateFormat;
 
 class Run {
+	int _id;
 	Timespan _result;
 	Distance _distance;
 	DateTime _date;
 
+	int get id => _id;
 	String get result => _result.toString();
 	String get distance => _distance.toString();
 
-	Run(Timespan result, Distance distance, {DateTime date}) {
+	Run(this._id, Timespan result, Distance distance, {DateTime date}) {
 		this._result = result;
 		this._distance = distance;
 
