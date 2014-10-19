@@ -1,4 +1,4 @@
-library runmodels;
+library models.run;
 
 import 'package:intl/intl.dart' show DateFormat;
 
@@ -11,6 +11,7 @@ class Run {
 	int get id => _id;
 	String get result => _result.toString();
 	String get distance => _distance.toString();
+	DateTime get date => _date;
 
 	Run(this._id, Timespan result, Distance distance, {DateTime date}) {
 		this._result = result;

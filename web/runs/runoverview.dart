@@ -38,7 +38,7 @@ class RunOverview extends PolymerElement {
 	void testClick() {
 		Timespan time = new Timespan(hours: 0, minutes: 29, seconds: 6);
 		Distance distance = new Distance(6.5);
-		//TODO add to controller
+		//TODO fix id
 		//TODO fix selection bug
 		runlist.add(new Run(999, time, distance));
 	}

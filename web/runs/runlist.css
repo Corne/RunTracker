@@ -3,18 +3,29 @@ paper-item::shadow #ripple {
 		color: #3367d6;
 }
 
-
-
 .core-selected {
   background: #eee;
   color: #4285f4;
 }
 
+
 .container {
 	display: flex;
 }
 
+.test {
+	display: flex;
+	justify-content: space-around;
+	font-size: 16px;
+	height: 48px;
+	align-items: center;
+}
+
+
+
+
+
 .statistics {
-	width: 200px;
+	width: 250px;
 	margin-left: 1em;	
 }

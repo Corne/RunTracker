@@ -1,6 +1,7 @@
 library runlist;
 
 import 'package:polymer/polymer.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import '../models/run.dart';
 import '../controllers/runcontroller.dart';
 
@@ -19,8 +20,10 @@ class RunList extends PolymerElement {
 
 		var runs = _controller.getAll().map((r) => new RunViewModel(r));
 		data = new ObservableList.from(runs);
+		
+		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
 	}
-
+	
 	Run get selectedItem {
 		if (selectedResult == null) {
 			return null;
@@ -62,10 +65,13 @@ class RunList extends PolymerElement {
 }
 
 class RunViewModel {
+	final DateFormat _format = new DateFormat("dd-MM-yyyy");
+	
 	Run run;
 
 	String get result => this.run.result.toString();
 	String get distance => this.run.distance.toString();
+	String get date => _format.format(this.run.date);
 
 	RunViewModel(Run run) {
 		this.run = run;

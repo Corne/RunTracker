@@ -10,16 +10,31 @@
 		<div class="container">
 			<core-selector class="statistics" selected="{{selectedDistance}}">
 				<template repeat="{{distance in distances}}">
-					<paper-item>{{distance}}</paper-item>
+					<paper-item label="{{distance}}"></paper-item>
 				</template>
 			</core-selector>
 			
 			<core-selector class="statistics" selected="{{selectedResult}}">
 				<template repeat="{{viewmodel in results}}">
-					<paper-item>{{viewmodel.result}}</paper-item>
+					
+					<!-- paper-item has fucked alignment for custom content -->
+					<div class="test">
+						<span>{{viewmodel.result}}</span>
+						<span>{{viewmodel.date}}</span>
+					</div>
 				</template>
 			</core-selector>
 		</div>
+		
+		<!--<core-selector>
+			<template repeat="{{viewmodel in data}}">
+				<paper-item>
+					<span>{{viewmodel.distance}}</span>
+					<span>{{viewmodel.result}}</span>
+					<span>{{viewmodel.date}}</span>
+				</paper-item>
+			</template>
+		</core-selector>-->
 	
 		<script type="application/dart" src="runlist.dart" ></script>
 	</template>
