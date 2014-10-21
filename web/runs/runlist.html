@@ -2,12 +2,15 @@
 <link rel="import" href="packages/core_elements/core_selector.html">
 <link rel="import" href="packages/paper_elements/paper_item.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/paper_elements/paper_ripple.html">
 
 <polymer-element name="run-list" attributes="data">
 	<template>
 		<link rel="stylesheet" href="runlist.css">
 				
+		
 		<div class="container">
+
 			<core-selector class="statistics" selected="{{selectedDistance}}">
 				<template repeat="{{distance in distances}}">
 					<paper-item label="{{distance}}"></paper-item>
@@ -18,10 +21,16 @@
 				<template repeat="{{viewmodel in results}}">
 					
 					<!-- paper-item has fucked alignment for custom content -->
-					<div class="test">
+						<!-- 
+							fit attribute needs parent with relative layout:
+						 	https://www.polymer-project.org/docs/polymer/layout-attrs.html 
+						-->
+					<div class="test" relative>
+						<paper-ripple fit></paper-ripple>
 						<span>{{viewmodel.result}}</span>
 						<span>{{viewmodel.date}}</span>
 					</div>
+					
 				</template>
 			</core-selector>
 		</div>

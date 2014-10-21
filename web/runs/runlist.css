@@ -19,9 +19,12 @@ paper-item::shadow #ripple {
 	font-size: 16px;
 	height: 48px;
 	align-items: center;
+	cursor: pointer;
 }
 
-
+paper-ripple {
+	color: #3367d6;
+}
 
 
 
