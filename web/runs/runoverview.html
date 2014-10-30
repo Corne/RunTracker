@@ -3,13 +3,15 @@
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="runlist.html">
 <link rel="import" href="runstats.html">
+<link rel="import" href="add_run_dialog.html">
+
 
 <polymer-element name="run-overview">
 	<template>
 		<link rel="stylesheet" href="../styles/default.css">
 		<link rel="stylesheet" href="runoverview.css">
 
-		<div class="container">
+		<div id="container">
 			<div>
 				<run-list id="runlist"></run-list>
 			</div>
@@ -32,7 +34,9 @@
 		</div>-->
 		
 		<paper-button class="colored" label="add" on-click="{{testClick}}"></paper-button>
-		<paper-button class="colored" label="add" raisedButton></paper-button>
+		<paper-button class="colored" label="add" on-click="{{buttonClick}}" raisedButton></paper-button>
+		
+		<add-run-dialog open="{{showDialog}}"></add-run-dialog>
 	</template>
 	<script type="application/dart" src="runoverview.dart" ></script>
 </polymer-element>

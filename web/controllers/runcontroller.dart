@@ -31,4 +31,13 @@ class RunController {
 	Run getById(int id){
 		return _tempruns.firstWhere((r) => r.id == id);
 	}
+	
+	Run create(Timespan timespan, Distance distance, {DateTime date}){
+		//to call create on api
+		int id = _tempruns.last.id + 1;
+		Run run = new Run(id, timespan, distance, date: date);
+		_tempruns.add(run);
+		
+		return run;
+	}
 }

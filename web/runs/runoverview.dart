@@ -3,6 +3,8 @@ library runoverview;
 import 'package:polymer/polymer.dart';
 import '../models/run.dart';
 import 'runlist.dart';
+import 'add_run_dialog.dart';
+import 'dart:html';
 
 @CustomTag('run-overview')
 class RunOverview extends PolymerElement {
@@ -41,6 +43,14 @@ class RunOverview extends PolymerElement {
 		//TODO fix id
 		//TODO fix selection bug
 		runlist.add(new Run(999, time, distance));
+	}
+	
+	@observable bool showDialog = false;
+	void buttonClick() {
+		//var container = this.shadowRoot.querySelector("#container");
+		//var dialog = new Element.tag("add-run-dialog");
+		//container.children.add(dialog);
+		showDialog = true;
 	}
 
 

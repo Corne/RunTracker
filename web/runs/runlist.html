@@ -7,10 +7,8 @@
 <polymer-element name="run-list" attributes="data">
 	<template>
 		<link rel="stylesheet" href="runlist.css">
-				
-		
+					
 		<div class="container">
-
 			<core-selector class="statistics" selected="{{selectedDistance}}">
 				<template repeat="{{distance in distances}}">
 					<paper-item label="{{distance}}"></paper-item>
