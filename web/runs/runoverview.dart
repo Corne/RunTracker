@@ -3,8 +3,6 @@ library runoverview;
 import 'package:polymer/polymer.dart';
 import '../models/run.dart';
 import 'runlist.dart';
-import 'add_run_dialog.dart';
-import 'dart:html';
 
 @CustomTag('run-overview')
 class RunOverview extends PolymerElement {
@@ -52,7 +50,6 @@ class RunOverview extends PolymerElement {
 		//container.children.add(dialog);
 		showDialog = true;
 	}
-
 
 	int toInteger(String value) {
 		if (value == null || value.isEmpty) {

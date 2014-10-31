@@ -17,5 +17,7 @@ class AddRunDialog extends PolymerElement {
   void createRun() {
   	var controller  = new RunController();
   	
+  	//controller.create(timespan, distance)
+  	
   }
 }
