@@ -4,64 +4,73 @@ import 'package:polymer/polymer.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import '../models/run.dart';
 import '../controllers/runcontroller.dart';
+import '../lib/ObservableSet.dart';
 
 @CustomTag('run-list')
 class RunList extends PolymerElement {
 
 	final RunController _controller = new RunController();
 
-	@observable ObservableList<RunViewModel> data;
+	//@observable ObservableList<RunViewModel> data;
 	@observable int selectedResult;
-	@observable int selectedDistance;
-
+	@observable int selectedDistanceIndex;
+	
+	@ComputedProperty("selectedDistanceIndex")
+	String get selectedDistance { 
+		if(selectedDistanceIndex != null) {
+			return viewmodels.keys.elementAt(selectedDistanceIndex);
+		}
+		return "";
+	}
+	
+	final ObservableMap<String, List<RunViewModel>> viewmodels = new ObservableMap();
 	RunList.created()
 			: super.created() {
-		viewmodels = new ObservableMap();
-
-		var runs = _controller.getAll().map((r) => new RunViewModel(r));
-		data = new ObservableList.from(runs);
 		
-		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
+		var runs = _controller.getAll().map((r) => new RunViewModel(r));
+		this.orderBy(runs, (e) => e.distance);
+				
+		onPropertyChange(this, #selectedDistanceIndex, () => selectedResult = null);
 	}
 	
-	Run get selectedItem {
-		if (selectedResult == null) {
-			return null;
-		} else {
-			return results.elementAt(selectedResult).run;
-		}
-	}
-
-	ObservableMap<String, Iterable<RunViewModel>> viewmodels;
-
-	void add(Run run){
-		this.data.add(new RunViewModel(run));
-	}
-	
-	void orderByDistance() {
-		this.orderBy((vm) => vm.distance);
-	}
-
-	void orderBy(String property(RunViewModel el)) {
+	void orderBy(Iterable<RunViewModel> data, String property(RunViewModel el)) {
 		var keys = data.map((e) => property(e)).toSet();
 		for (String key in keys) {
-			viewmodels[key] = data.where((e) => property(e) == key);
+			viewmodels[key] = toObservable(data.where((e) => property(e) == key));
+		}
+	}
+	
+//	void dataChanged() {
+//		distances.addAll(data.map((e) => e.distance));
+//	}
+	
+	Run get selectedItem {
+		if (selectedDistance == null || selectedResult == null) {
+			return null;
+		} else {
+			return viewmodels[selectedDistance].elementAt(selectedResult).run;
 		}
 	}
 
-	@ComputedProperty("data.length")
-	Set<String> get distances {
-		return data.map((vm) => vm.distance).toSet();
+	void add(Run run){
+		if(viewmodels.keys.contains(run.distance) == false){
+			viewmodels[run.distance] = toObservable([]);
+		}
+		viewmodels[run.distance].add(new RunViewModel(run));
+	}
+	
+	Iterable<String> sort(Iterable<String> values) {
+		return values.toList()..sort();
 	}
 
-	@ComputedProperty("selectedDistance")
-	Iterable<RunViewModel> get results {
-		if (data != null && selectedDistance != null) {
-			return data.where(
-					(e) => e.distance == distances.elementAt(selectedDistance));
-		}
-		return [];
-	}
+//	@ComputedProperty("selectedDistance")
+//	Iterable<RunViewModel> get results {
+//		if (data != null && selectedDistance != null) {
+//			return data.where(
+//					(e) => e.distance == distances.elementAt(selectedDistance));
+//		}
+//		return [];
+//	}
 }
 
 class RunViewModel {

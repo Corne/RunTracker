@@ -4,19 +4,19 @@
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="packages/paper_elements/paper_ripple.html">
 
-<polymer-element name="run-list" attributes="data">
+<polymer-element name="run-list">
 	<template>
 		<link rel="stylesheet" href="runlist.css">
 					
 		<div class="container">
-			<core-selector class="statistics" selected="{{selectedDistance}}">
-				<template repeat="{{distance in distances}}">
+			<core-selector class="statistics" selected="{{selectedDistanceIndex}}">
+				<template repeat="{{distance in viewmodels.keys | sort}}">
 					<paper-item label="{{distance}}"></paper-item>
 				</template>
 			</core-selector>
 			
 			<core-selector class="statistics" selected="{{selectedResult}}">
-				<template repeat="{{viewmodel in results}}">
+				<template repeat="{{viewmodel in viewmodels[selectedDistance]}}">
 					
 					<!-- paper-item has fucked alignment for custom content -->
 						<!-- 

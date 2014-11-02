@@ -2,9 +2,8 @@
 <link rel="import" href="packages/paper_elements/paper_dialog.html">
 <link rel="import" href="packages/paper_elements/paper_input.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/paper_elements/paper_focusable.html">
 <link rel="import" href="packages/paper_elements/paper_dialog_transition.html">
-<!--transition="paper-dialog-transition-center"-->
-
 
 <polymer-element name="add-run-dialog" attributes="open">
 	<template>
@@ -17,9 +16,8 @@
 				<paper-input label="seconds" type="number" value="{{seconds}}" min="0" max="60"></paper-input>
 			</div>
 			
-      <paper-button label="More Info..." dismissive></paper-button>
-      <paper-button label="Decline" affirmative></paper-button>
-      <paper-button label="Accept" affirmative autofocus></paper-button>
+      <paper-button label="Cancel" dismissive></paper-button>
+      <paper-button label="Save" autofocus affirmative disabled?="{{!validInput}}" on-click="{{createRun}}"></paper-button>
 		</paper-dialog>
 		
 		<script type="application/dart" src="add_run_dialog.dart" ></script>

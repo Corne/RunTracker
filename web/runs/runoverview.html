@@ -36,7 +36,7 @@
 		<paper-button class="colored" label="add" on-click="{{testClick}}"></paper-button>
 		<paper-button class="colored" label="add" on-click="{{buttonClick}}" raisedButton></paper-button>
 		
-		<add-run-dialog open="{{showDialog}}"></add-run-dialog>
+		<add-run-dialog open="{{showDialog}}" on-runadded="{{addRun}}"></add-run-dialog>
 	</template>
 	<script type="application/dart" src="runoverview.dart" ></script>
 </polymer-element>

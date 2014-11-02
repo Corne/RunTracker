@@ -3,16 +3,13 @@ library runoverview;
 import 'package:polymer/polymer.dart';
 import '../models/run.dart';
 import 'runlist.dart';
+import 'dart:html';
 
 @CustomTag('run-overview')
 class RunOverview extends PolymerElement {
 	@published String modelId;
 
 	@observable String name = 'hello';
-	//temp properties till better solution
-	@observable String tempHours;
-	@observable String tempMinutes;
-	@observable String tempSeconds;
 
 	@observable RunList runlist;
 
@@ -39,7 +36,6 @@ class RunOverview extends PolymerElement {
 		Timespan time = new Timespan(hours: 0, minutes: 29, seconds: 6);
 		Distance distance = new Distance(6.5);
 		//TODO fix id
-		//TODO fix selection bug
 		runlist.add(new Run(999, time, distance));
 	}
 	
@@ -51,11 +47,9 @@ class RunOverview extends PolymerElement {
 		showDialog = true;
 	}
 
-	int toInteger(String value) {
-		if (value == null || value.isEmpty) {
-			return 0;
-		} else {
-			return int.parse(value);
+	void addRun(Event e, Object detail, Node sender) {
+		if(detail is Run){
+			runlist.add(detail);
 		}
 	}
 
