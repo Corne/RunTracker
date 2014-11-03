@@ -3,8 +3,8 @@ library controllers.runcontroller;
 import '../models/run.dart';
 
 class RunController {
-	
-	final List<Run> _tempruns = new List<Run>();
+	//use static list till we have backend
+	static List<Run> _tempruns = new List<Run>();
 	
 	RunController() {
 		//test data
@@ -21,11 +21,11 @@ class RunController {
 						distance,
 						date: new DateTime(2014, 8, 12));
 		
-		this._tempruns.addAll([run1, run2, run3]);
+		_tempruns.addAll([run1, run2, run3]);
 	}
 	
 	Iterable<Run> getAll() {
-		return this._tempruns;
+		return _tempruns;
 	}
 	
 	Run getById(int id){
@@ -33,7 +33,6 @@ class RunController {
 	}
 	
 	Run create(Timespan timespan, Distance distance, {DateTime date}){
-		//to call create on api
 		int id = _tempruns.last.id + 1;
 		Run run = new Run(id, timespan, distance, date: date);
 		_tempruns.add(run);

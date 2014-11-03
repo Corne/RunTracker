@@ -4,14 +4,12 @@ import 'package:polymer/polymer.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import '../models/run.dart';
 import '../controllers/runcontroller.dart';
-import '../lib/ObservableSet.dart';
 
 @CustomTag('run-list')
 class RunList extends PolymerElement {
 
 	final RunController _controller = new RunController();
 
-	//@observable ObservableList<RunViewModel> data;
 	@observable int selectedResult;
 	@observable int selectedDistanceIndex;
 	
@@ -39,11 +37,7 @@ class RunList extends PolymerElement {
 			viewmodels[key] = toObservable(data.where((e) => property(e) == key));
 		}
 	}
-	
-//	void dataChanged() {
-//		distances.addAll(data.map((e) => e.distance));
-//	}
-	
+		
 	Run get selectedItem {
 		if (selectedDistance == null || selectedResult == null) {
 			return null;
@@ -63,14 +57,6 @@ class RunList extends PolymerElement {
 		return values.toList()..sort();
 	}
 
-//	@ComputedProperty("selectedDistance")
-//	Iterable<RunViewModel> get results {
-//		if (data != null && selectedDistance != null) {
-//			return data.where(
-//					(e) => e.distance == distances.elementAt(selectedDistance));
-//		}
-//		return [];
-//	}
 }
 
 class RunViewModel {
