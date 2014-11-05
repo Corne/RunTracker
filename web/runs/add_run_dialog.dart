@@ -15,6 +15,8 @@ class AddRunDialog extends PolymerElement {
 	@observable String hours = "";
 	@observable String minutes = "";
 	@observable String seconds = "";
+	
+	@observable String distance = "";
 
 	AddRunDialog.created() : super.created();
 
@@ -24,7 +26,7 @@ class AddRunDialog extends PolymerElement {
 	
 	void createRun() {
 		var controller = new RunController();
-		Run added = controller.create(_getTimeSpan(), new Distance(6.0));
+		Run added = controller.create(_getTimeSpan(), _getDistance());
 		
 		dispatchEvent(new CustomEvent("runadded", detail: added));
 	}
@@ -38,6 +40,10 @@ class AddRunDialog extends PolymerElement {
 				minutes: toInteger(minutes),
 				seconds: toInteger(seconds));
 	}
+	
+	Distance _getDistance() {
+		return new Distance(toDouble(distance));
+	}
 
 	int toInteger(String value) {
 		if (value == null || value.isEmpty) {
@@ -45,5 +51,9 @@ class AddRunDialog extends PolymerElement {
 		} else {
 			return int.parse(value);
 		}
+	}
+	
+	double toDouble(String value) {
+		return double.parse(value);
 	}
 }

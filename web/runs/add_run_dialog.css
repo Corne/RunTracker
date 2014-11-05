@@ -1,0 +1,9 @@
+#time {
+		display: flex;
+		align-items: flex-start;
+}
+
+#time paper-input {
+		width: 6em;
+		margin: 0.5em;
+}

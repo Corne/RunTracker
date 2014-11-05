@@ -11,15 +11,17 @@ class RunList extends PolymerElement {
 	final RunController _controller = new RunController();
 
 	@observable int selectedResult;
-	@observable int selectedDistanceIndex;
+//	@observable int selectedDistanceIndex;
+//	
+//	@ComputedProperty("selectedDistanceIndex")
+//	String get selectedDistance { 
+//		if(selectedDistanceIndex != null) {
+//			return viewmodels.keys.elementAt(selectedDistanceIndex);
+//		}
+//		return "";
+//	}
 	
-	@ComputedProperty("selectedDistanceIndex")
-	String get selectedDistance { 
-		if(selectedDistanceIndex != null) {
-			return viewmodels.keys.elementAt(selectedDistanceIndex);
-		}
-		return "";
-	}
+	@observable String selectedDistance;
 	
 	final ObservableMap<String, List<RunViewModel>> viewmodels = new ObservableMap();
 	RunList.created()

@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="runlist.css">
 					
 		<div class="container">
-			<core-selector class="statistics" selected="{{selectedDistanceIndex}}">
+			<core-selector class="statistics" valueattr="label" selected="{{selectedDistance}}">
 				<template repeat="{{distance in viewmodels.keys | sort}}">
 					<paper-item label="{{distance}}"></paper-item>
 				</template>
