@@ -5,5 +5,8 @@
 
 #time paper-input {
 		width: 6em;
+}
+
+paper-input {
 		margin: 0.5em;
 }

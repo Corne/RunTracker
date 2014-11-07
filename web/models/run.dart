@@ -10,7 +10,7 @@ class Run {
 
 	int get id => _id;
 	String get result => _result.toString();
-	String get distance => _distance.toString();
+	Distance get distance => _distance;
 	DateTime get date => _date;
 
 	Run(this._id, Timespan result, Distance distance, {DateTime date}) {

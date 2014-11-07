@@ -11,17 +11,7 @@ class RunList extends PolymerElement {
 	final RunController _controller = new RunController();
 
 	@observable int selectedResult;
-//	@observable int selectedDistanceIndex;
-//	
-//	@ComputedProperty("selectedDistanceIndex")
-//	String get selectedDistance { 
-//		if(selectedDistanceIndex != null) {
-//			return viewmodels.keys.elementAt(selectedDistanceIndex);
-//		}
-//		return "";
-//	}
-	
-	@observable String selectedDistance;
+	@observable String selectedDistance = "";
 	
 	final ObservableMap<String, List<RunViewModel>> viewmodels = new ObservableMap();
 	RunList.created()
@@ -30,7 +20,7 @@ class RunList extends PolymerElement {
 		var runs = _controller.getAll().map((r) => new RunViewModel(r));
 		this.orderBy(runs, (e) => e.distance);
 				
-		onPropertyChange(this, #selectedDistanceIndex, () => selectedResult = null);
+		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
 	}
 	
 	void orderBy(Iterable<RunViewModel> data, String property(RunViewModel el)) {
@@ -49,10 +39,10 @@ class RunList extends PolymerElement {
 	}
 
 	void add(Run run){
-		if(viewmodels.keys.contains(run.distance) == false){
-			viewmodels[run.distance] = toObservable([]);
+		if(viewmodels.keys.contains(run.distance.toString()) == false){
+			viewmodels[run.distance.toString()] = toObservable([]);
 		}
-		viewmodels[run.distance].add(new RunViewModel(run));
+		viewmodels[run.distance.toString()].add(new RunViewModel(run));
 	}
 	
 	Iterable<String> sort(Iterable<String> values) {
