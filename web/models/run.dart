@@ -9,7 +9,7 @@ class Run {
 	DateTime _date;
 
 	int get id => _id;
-	String get result => _result.toString();
+	Timespan get result => _result;
 	Distance get distance => _distance;
 	DateTime get date => _date;
 
@@ -55,9 +55,21 @@ class Timespan {
 	int seconds;
 
 	Timespan({int hours: 0, int minutes: 0, int seconds: 0}) {
+		if(minutes > 60 || seconds > 60){
+			throw new ArgumentError("Minutes and seconds should have value under 60");
+		}
 		this.hours = hours;
 		this.minutes = minutes;
 		this.seconds = seconds;
+	}
+	
+	Timespan.fromTotalSeconds(final int seconds){
+		int rest = seconds;
+		this.hours = (rest / 3600).floor();
+		rest = rest - (hours * 3600);
+		this.minutes = (rest / 60).floor();
+		rest = rest - (minutes * 60);
+		this.seconds = rest;
 	}
 	
 	double totalHours() {

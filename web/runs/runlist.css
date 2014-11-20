@@ -22,6 +22,11 @@ paper-item::shadow #ripple {
 	cursor: pointer;
 }
 
+.test span {
+	flex-basis: 50%;
+	text-align: center;
+}
+
 paper-ripple {
 	color: #3367d6;
 }

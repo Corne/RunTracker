@@ -13,10 +13,18 @@
 				<template repeat="{{distance in viewmodels.keys | sort}}">
 					<paper-item label="{{distance}}"></paper-item>
 				</template>
-			</core-selector>
-			
-			<core-selector class="statistics" selected="{{selectedResult}}">
-				<template repeat="{{viewmodel in viewmodels[selectedDistance]}}">
+			</core-selector>		
+
+				<!--<template bind if="{{averageResult != null}}">
+					<div class="test" relative>
+						<paper-ripple fit></paper-ripple>
+						<span>{{averageResult.result}}</span>
+						<span>average</span>
+					</div>
+				</template>-->
+
+			<core-selector class="statistics" selected="{{selectedResult}}">			
+				<template repeat="{{viewmodel in activeResults}}">
 					
 					<!-- paper-item has fucked alignment for custom content -->
 						<!-- 
@@ -31,17 +39,8 @@
 					
 				</template>
 			</core-selector>
+
 		</div>
-		
-		<!--<core-selector>
-			<template repeat="{{viewmodel in data}}">
-				<paper-item>
-					<span>{{viewmodel.distance}}</span>
-					<span>{{viewmodel.result}}</span>
-					<span>{{viewmodel.date}}</span>
-				</paper-item>
-			</template>
-		</core-selector>-->
 	
 		<script type="application/dart" src="runlist.dart" ></script>
 	</template>
