@@ -48,7 +48,7 @@ class RunList extends PolymerElement {
 		Timespan timespan = new Timespan.fromTotalSeconds(averageTotal.round());
 		//temp solution returning a runvm, so we can use it for details
 		Run run = new Run(0, timespan, viewmodels[selectedDistance].first.run.distance);
-		return new RunViewModel(run);
+		return new RunViewModel.customdescription(run, "average");
 	}
 
 	int sum(Iterable<Timespan> data, int property(Timespan el)) {
@@ -83,15 +83,23 @@ class RunList extends PolymerElement {
 }
 
 class RunViewModel {
-	final DateFormat _format = new DateFormat("dd-MM-yyyy");
+	static final DateFormat _format = new DateFormat("dd-MM-yyyy");
 
+	final String _description;
+	
 	Run run;
 
 	String get result => this.run.result.toString();
 	String get distance => this.run.distance.toString();
-	String get date => _format.format(this.run.date);
+	String get description => _description;
 
-	RunViewModel(Run run) {
+	RunViewModel(Run run) : 
+		_description = _format.format(run.date) {
+		this.run = run;	
+	}
+	
+	RunViewModel.customdescription(Run run, String description) : 
+		_description = description {
 		this.run = run;
 	}
 }
