@@ -1,0 +1,13 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<script src="packages/browser/dart.js"></script>
+<script src="../chartist/chartist.min.js"></script>
+
+<polymer-element name="line-graph" attributes="points">
+	<template>
+		<link rel="stylesheet" href="../chartist/chartist.min.css">
+		
+		<div class="ct-chart ct-perfect-fourth"></div>
+		
+		<script type="application/dart" src="line_graph.dart"></script>
+	</template>
+</polymer-element>

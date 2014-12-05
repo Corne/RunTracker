@@ -1,0 +1,27 @@
+<link rel="import" href="packages/polymer/polymer.html">
+
+<polymer-element name="line-graph">
+	<template>
+	<style>
+		.grid {
+		  stroke: black;
+		  stroke-width: 1;
+		}
+	</style>
+		
+		<div>
+			HELLO
+			<svg width="400" height="400">
+			
+				<g class="grid x-grid" id="xGrid">
+				  <line x1="10" x2="10" y1="10" y2="400"></line>
+				</g>
+				<g class="grid y-grid" id="yGrid">
+				  <line x1="10" x2="400" y1="400" y2="400"></line>
+				</g>
+			</svg>
+		</div>
+		
+		<script type="application/dart" src="line_graph.dart" ></script>
+	</template>
+</polymer-element>

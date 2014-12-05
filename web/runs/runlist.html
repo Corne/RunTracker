@@ -15,28 +15,18 @@
 				</template>
 			</core-selector>		
 
-				<!--<template bind if="{{averageResult != null}}">
-					<div class="test" relative>
-						<paper-ripple fit></paper-ripple>
-						<span>{{averageResult.result}}</span>
-						<span>average</span>
-					</div>
-				</template>-->
 
+				<!-- 
+					fit attribute needs parent with relative layout:
+				 	https://www.polymer-project.org/docs/polymer/layout-attrs.html 
+				-->
 			<core-selector class="statistics" selected="{{selectedResult}}">			
 				<template repeat="{{viewmodel in activeResults}}">
-					
-					<!-- paper-item has fucked alignment for custom content -->
-						<!-- 
-							fit attribute needs parent with relative layout:
-						 	https://www.polymer-project.org/docs/polymer/layout-attrs.html 
-						-->
 					<div class="test" relative>
 						<paper-ripple fit></paper-ripple>
 						<span>{{viewmodel.result}}</span>
 						<span>{{viewmodel.description}}</span>
 					</div>
-					
 				</template>
 			</core-selector>
 

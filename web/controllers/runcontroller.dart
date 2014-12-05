@@ -3,8 +3,7 @@ library controllers.runcontroller;
 import '../models/run.dart';
 
 class RunController {
-	//use static list till we have backend
-	static List<Run> _tempruns = new List<Run>();
+	final List<Run> _tempruns = new List<Run>();
 	
 	RunController() {
 		//test data

@@ -9,12 +9,11 @@ import '../controllers/runcontroller.dart';
 class RunList extends PolymerElement {
 
 	final RunController _controller = new RunController();
-
-	@observable int selectedResult;
-	@observable String selectedDistance = "";
-
 	final ObservableMap<String, List<RunViewModel>> viewmodels = new ObservableMap();
 	final ObservableList<RunViewModel> activeResults = new ObservableList();
+	
+	@observable int selectedResult;
+	@observable String selectedDistance = "";
 
 	RunList.created()
 			: super.created() {
@@ -23,10 +22,10 @@ class RunList extends PolymerElement {
 		this.orderBy(runs, (e) => e.distance);
 
 		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
-		onPropertyChange(this, #selectedDistance, bindActiveResult);
+		onPropertyChange(this, #selectedDistance, bindActiveResults);
 	}
 
-	void bindActiveResult() {
+	void bindActiveResults() {
 		activeResults.clear();
 
 		if (selectedDistance.isEmpty) {
@@ -47,7 +46,7 @@ class RunList extends PolymerElement {
 
 		Timespan timespan = new Timespan.fromTotalSeconds(averageTotal.round());
 		//temp solution returning a runvm, so we can use it for details
-		Run run = new Run(0, timespan, viewmodels[selectedDistance].first.run.distance);
+		Run run = new Run(-1, timespan, viewmodels[selectedDistance].first.run.distance);
 		return new RunViewModel.customdescription(run, "average");
 	}
 
@@ -75,6 +74,8 @@ class RunList extends PolymerElement {
 			viewmodels[run.distance.toString()] = toObservable([]);
 		}
 		viewmodels[run.distance.toString()].add(new RunViewModel(run));
+		
+		bindActiveResults();
 	}
 
 	Iterable<String> sort(Iterable<String> values) {
