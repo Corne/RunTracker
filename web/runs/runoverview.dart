@@ -4,22 +4,31 @@ import 'package:polymer/polymer.dart';
 import '../models/run.dart';
 import 'runlist.dart';
 import 'dart:html';
+import 'runpoint.dart';
 
 @CustomTag('run-overview')
 class RunOverview extends PolymerElement {
+	final ObservableList<RunPoint> runpoints = new ObservableList();
+	
+	@published Iterable<Run> runs;
 	@published String modelId;
-
+	
 	@observable String name = 'hello';
-
 	@observable RunList runlist;
-
+	
 	RunOverview.created() : super.created() {
+		onPropertyChange(this, #runs, _updateRunPoints);
 	}
+	
+  void _updateRunPoints() {
+  	this.runpoints.clear();
+  	this.runpoints.addAll(runs.map((r) => new RunPoint(r)));
+  }
 
 	@override
 	void domReady() {
 		//todo switch to polymer published propeties
-		runlist = this.shadowRoot.querySelector("#runlist");
+		runlist = this.shadowRoot.querySelector("#runlist");	
 	}
 
 	bool get itemSelected => run != null;
@@ -41,9 +50,6 @@ class RunOverview extends PolymerElement {
 	
 	@observable bool showDialog = false;
 	void buttonClick() {
-		//var container = this.shadowRoot.querySelector("#container");
-		//var dialog = new Element.tag("add-run-dialog");
-		//container.children.add(dialog);
 		showDialog = true;
 	}
 
@@ -52,5 +58,4 @@ class RunOverview extends PolymerElement {
 			runlist.add(detail);
 		}
 	}
-
 }

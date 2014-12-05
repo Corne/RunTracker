@@ -4,9 +4,9 @@
 <link rel="import" href="runlist.html">
 <link rel="import" href="runstats.html">
 <link rel="import" href="add_run_dialog.html">
+<link rel="import" href="../views/chartist_wrapper/line_graph.html" />
 
-
-<polymer-element name="run-overview">
+<polymer-element name="run-overview" attributes="runs">
 	<template>
 		<link rel="stylesheet" href="../styles/default.css">
 		<link rel="stylesheet" href="runoverview.css">
@@ -19,6 +19,8 @@
 					<run-stats run="{{run}}"></run-stats>
 				</template>
 			</div>
+			
+			<line-graph style="width: 500px; height: 500px" points="{{runpoints}}"></line-graph>
 		</div>
 				
 		<paper-button class="colored" label="add" on-click="{{testClick}}"></paper-button>

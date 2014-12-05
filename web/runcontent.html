@@ -2,15 +2,13 @@
 <link rel="import" href="runs/runoverview.html" />
 <link rel="import" href="races/raceoverview.html" />
 <link rel="import" href="races/racedetails.html" />
-<link rel="import" href="views/chartist_wrapper/line_graph.html" />
 
 <polymer-element name="run-content">
 	<template>
 		<link rel="stylesheet" href="runcontent.css">
 	
    	<div id="contentcontainer">
-   		<run-overview class="child"></run-overview>	
-   		<line-graph class="child" points="{{runpoints}}"></line-graph>
+   		<run-overview class="child" runs="{{runs}}"></run-overview>	
    	</div>
 	</template>
 	
