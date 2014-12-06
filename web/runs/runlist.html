@@ -3,9 +3,11 @@
 <link rel="import" href="packages/paper_elements/paper_item.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="packages/paper_elements/paper_ripple.html">
+<link rel="import" href="add_run_dialog.html">
 
-<polymer-element name="run-list">
+<polymer-element name="run-list" attributes="runs">
 	<template>
+		<link rel="stylesheet" href="../styles/default.css">
 		<link rel="stylesheet" href="runlist.css">
 					
 		<div class="container">
@@ -20,7 +22,7 @@
 				-->
 			<core-selector class="statistics" selected="{{selectedResult}}">			
 				<template repeat="{{viewmodel in activeResults}}">
-					<div class="test" relative>
+					<div class="runresult" relative>
 						<paper-ripple fit></paper-ripple>
 						<span>{{viewmodel.result}}</span>
 						<span>{{viewmodel.description}}</span>
@@ -29,6 +31,12 @@
 			</core-selector>
 
 		</div>
+	
+	  <paper-button class="colored" label="add" on-click="{{testClick}}"></paper-button>
+		<paper-button class="colored" label="add" on-click="{{buttonClick}}" raisedButton></paper-button>
+		
+		<add-run-dialog open="{{showDialog}}" defaultdistance="{{selectedDistance}}">
+		</add-run-dialog>
 	
 		<script type="application/dart" src="runlist.dart" ></script>
 	</template>

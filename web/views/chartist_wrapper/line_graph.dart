@@ -6,11 +6,15 @@ class LineGraph extends PolymerElement {
 	
 	@published Iterable<GraphPoint> points;
 	
-	LineGraph.created() : super.created();
+	LineGraph.created() : super.created() {
+		onPropertyChange(this, #points, _updatechart);
+	}
 
 	@override
 	void domReady() {
-
+	}
+	
+	void _updatechart() {
 		JsObject data = new JsObject.jsify({
 			"labels": points.map((p) => p.label),
 			"series": [points.map((p) => p.value)]

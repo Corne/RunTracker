@@ -32,10 +32,6 @@ class AddRunDialog extends PolymerElement {
 		}
 	}
 
-	void flipTest() {
-		test = !test;
-	}
-
 	void createRun() {
 		var controller = new RunController();
 		Run added = controller.create(_getTimeSpan(), _getDistance());

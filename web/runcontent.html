@@ -7,8 +7,8 @@
 	<template>
 		<link rel="stylesheet" href="runcontent.css">
 	
-   	<div id="contentcontainer">
-   		<run-overview class="child" runs="{{runs}}"></run-overview>	
+   	<div>
+   		<run-overview id="overview" runs="{{runs}}" on-runadded="{{addRun}}"></run-overview>	
    	</div>
 	</template>
 	

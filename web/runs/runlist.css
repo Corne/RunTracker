@@ -13,7 +13,7 @@ paper-item::shadow #ripple {
 	display: flex;
 }
 
-.test {
+.runresult {
 	display: flex;
 	justify-content: space-around;
 	font-size: 16px;
@@ -23,7 +23,7 @@ paper-item::shadow #ripple {
 	cursor: pointer;
 }
 
-.test span {
+.runresult span {
 	flex-basis: 50%;
 	text-align: center;
 }

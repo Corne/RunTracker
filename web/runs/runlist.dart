@@ -1,16 +1,17 @@
 library runlist;
 
+import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import '../models/run.dart';
-import '../controllers/runcontroller.dart';
 
 @CustomTag('run-list')
 class RunList extends PolymerElement {
 
-	final RunController _controller = new RunController();
 	final ObservableMap<String, List<RunViewModel>> viewmodels = new ObservableMap();
 	final ObservableList<RunViewModel> activeResults = new ObservableList();
+	
+	@published Iterable<Run> runs;
 	
 	@observable int selectedResult;
 	@observable String selectedDistance = "";
@@ -18,14 +19,23 @@ class RunList extends PolymerElement {
 	RunList.created()
 			: super.created() {
 
-		var runs = _controller.getAll().map((r) => new RunViewModel(r));
-		this.orderBy(runs, (e) => e.distance);
+		onPropertyChange(this, #runs, _bindruns);
 
 		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
-		onPropertyChange(this, #selectedDistance, bindActiveResults);
+		onPropertyChange(this, #selectedDistance, _bindActiveResults);
 	}
 
-	void bindActiveResults() {
+	void update() {
+		_bindruns();
+		_bindActiveResults();
+	}
+	
+	void _bindruns() {
+		viewmodels.clear();
+		orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.distance);
+	}
+	
+	void _bindActiveResults() {
 		activeResults.clear();
 
 		if (selectedDistance.isEmpty) {
@@ -40,12 +50,11 @@ class RunList extends PolymerElement {
 
 	//temp solution returning a runvm, so we can use it for details
 	RunViewModel getAverageResult(Iterable<Timespan> results) {
-
 		int totalSeconds = sum(results, (timespan) => timespan.totalSeconds());
 		double averageTotal = totalSeconds / results.length;
 
 		Timespan timespan = new Timespan.fromTotalSeconds(averageTotal.round());
-		//temp solution returning a runvm, so we can use it for details
+
 		Run run = new Run(-1, timespan, viewmodels[selectedDistance].first.run.distance);
 		return new RunViewModel.customdescription(run, "average");
 	}
@@ -54,7 +63,7 @@ class RunList extends PolymerElement {
 		return data.map((e) => property(e)).reduce((value, element) => value + element);
 	}
 
-	void orderBy(Iterable<RunViewModel> data, String property(RunViewModel el)) {
+	void orderViewModels(Iterable<RunViewModel> data, String property(RunViewModel el)) {
 		var keys = data.map((e) => property(e)).toSet();
 		for (String key in keys) {
 			viewmodels[key] = toObservable(data.where((e) => property(e) == key));
@@ -75,11 +84,25 @@ class RunList extends PolymerElement {
 		}
 		viewmodels[run.distance.toString()].add(new RunViewModel(run));
 		
-		bindActiveResults();
+		_bindActiveResults();
 	}
 
 	Iterable<String> sort(Iterable<String> values) {
 		return values.toList()..sort();
+	}
+	
+	//todo move / refactor?
+	@observable bool showDialog = false;  
+	void testClick() {
+		Timespan time = new Timespan(hours: 0, minutes: 29, seconds: 6);
+		Distance distance = new Distance(6.5);
+		Run run = new Run(999, time, distance);
+		
+		dispatchEvent(new CustomEvent("runadded", detail: run));
+	}
+	
+	void buttonClick() {
+		showDialog = true;
 	}
 }
 
