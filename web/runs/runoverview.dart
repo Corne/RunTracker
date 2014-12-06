@@ -11,27 +11,32 @@ class RunOverview extends PolymerElement {
 
 	@observable Iterable<RunPoint> runpoints;
 	@observable RunList runlist;
-	
+
 	RunOverview.created() : super.created() {
-		onPropertyChange(this, #runs, _listenchanges);
-		//onPropertyChange(this, #runs, _updateRunPoints);
 	}
-	
-	void _listenchanges() {
-		//runs.listChanges.listen((_) => _updateRunPoints);
-	}
-	
+
+
 	//todo listen doesn't seem to work, so call update from parent
-  void updateOverview() {
-  	//runs.where((r) => r.distance == runlist.selectedDistance)
-  	this.runpoints = runs.map((r) => new RunPoint(r));
-  	runlist.update();
-  }
+	void updateOverview() {
+		_updateRunPoints();
+		runlist.update();
+	}
+
+	void _updateRunPoints() {
+		if (runlist == null || runlist.selectedDistance == null) {
+			this.runpoints = [];
+		} else {
+			this.runpoints = runs
+					.where((r) => r.distance.toString() == runlist.selectedDistance)
+					.map((r) => new RunPoint(r));
+		}
+	}
 
 	@override
 	void domReady() {
-		runlist = this.shadowRoot.querySelector("#runlist");	
-		this.runpoints = runs.map((r) => new RunPoint(r));
+		runlist = this.shadowRoot.querySelector("#runlist");
+
+		onPropertyChange(runlist, #selectedDistance, _updateRunPoints);
 	}
 
 	bool get itemSelected => run != null;
@@ -43,5 +48,5 @@ class RunOverview extends PolymerElement {
 		}
 		return null;
 	}
-	
+
 }
