@@ -11,30 +11,35 @@ class AddRunDialog extends PolymerElement {
 	@published bool open = false;
 	@published String defaultdistance = "";
 
-	@observable bool test = true;
-
 	@observable String hours = "";
 	@observable String minutes = "";
 	@observable String seconds = "";
 
 	@observable String distance = "";
+	@observable String date = "";
+	
 
 	AddRunDialog.created() : super.created() {
-		onPropertyChange(this, #open, setDefaultDistance);
+		onPropertyChange(this, #open, setDefaultValues);
 	}
 
-	void setDefaultDistance() {
-		if (open) {
+	void setDefaultValues() {
+		if (open) { 
 			//kinda ugly but does the job for now
 			RegExp exp = new RegExp("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?");
       Match match = exp.firstMatch(defaultdistance);
-      this.distance = match.group(0);
+      if(match != null){
+      	this.distance = match.group(0);
+      }
+      //todo use transformer: https://gist.github.com/Vloz/10553552
+      String now = new DateTime.now().toString();
+      this.date = now.substring(0, now.lastIndexOf(' '));
 		}
 	}
 
 	void createRun() {
 		var controller = new RunController();
-		Run added = controller.create(_getTimeSpan(), _getDistance());
+		Run added = controller.create(_getTimeSpan(), _getDistance(), date: _getDateTime());
 
 		dispatchEvent(new CustomEvent("runadded", detail: added));
 	}
@@ -51,6 +56,10 @@ class AddRunDialog extends PolymerElement {
 
 	Distance _getDistance() {
 		return new Distance(toDouble(distance));
+	}
+	
+	DateTime _getDateTime() {
+		return DateTime.parse(date);
 	}
 
 	int toInteger(String value) {

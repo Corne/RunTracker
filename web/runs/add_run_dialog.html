@@ -23,6 +23,10 @@
 				<paper-input label="distance" type="number" value="{{distance}}" step="0.1"></paper-input>
 			</div>
 			
+			<div id="date">
+				<paper-input type="date" value="{{date}}"></paper-input>
+			</div>
+			
       <paper-button label="Cancel" dismissive></paper-button>
       <paper-button label="Save" autofocus affirmative disabled?="{{!validInput}}" on-click="{{createRun}}"></paper-button>
 		</paper-dialog>

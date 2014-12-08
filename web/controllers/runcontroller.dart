@@ -19,7 +19,7 @@ class RunController {
 						new Timespan(minutes: 21, seconds: 2),
 						distance,
 						date: new DateTime(2014, 8, 12));
-		
+
 		_tempruns.addAll([run1, run2, run3]);
 	}
 	
