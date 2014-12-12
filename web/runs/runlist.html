@@ -3,12 +3,23 @@
 <link rel="import" href="packages/paper_elements/paper_item.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="packages/paper_elements/paper_ripple.html">
+<link rel="import" href="packages/paper_elements/paper_tabs.html">
 <link rel="import" href="add_run_dialog.html">
 
 <polymer-element name="run-list" attributes="runs">
 	<template>
 		<link rel="stylesheet" href="../styles/default.css">
 		<link rel="stylesheet" href="runlist.css">
+					
+		<paper-tabs selected="{{selectedOrder}}">
+		  <paper-tab>
+		    <span horizontal center-center layout>Distance</span>
+		  </paper-tab>
+		  <paper-tab>
+		    <span horizontal center-center layout>Date</span>
+		  </paper-tab>
+		</paper-tabs>
+  			
 					
 		<div class="container">
 			<core-selector class="statistics" valueattr="label" selected="{{selectedDistance}}">

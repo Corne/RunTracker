@@ -15,6 +15,8 @@ class LineGraph extends PolymerElement {
 	}
 	
 	void _updatechart() {
+		if(points.length == 0) return;
+		
 		JsObject data = new JsObject.jsify({
 			"labels": points.map((p) => p.label),
 			"series": [points.map((p) => p.value)]

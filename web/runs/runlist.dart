@@ -15,6 +15,8 @@ class RunList extends PolymerElement {
 	
 	@observable int selectedResult;
 	@observable String selectedDistance = "";
+	
+	@observable int selectedOrder = 0;
 
 	RunList.created()
 			: super.created() {
@@ -23,18 +25,26 @@ class RunList extends PolymerElement {
 
 		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
 		onPropertyChange(this, #selectedDistance, _bindActiveResults);
+	
+		onPropertyChange(this, #selectedOrder, _bindruns);
 	}
-
+	
 	void update() {
 		_bindruns();
 		_bindActiveResults();
 	}
-	
+		
 	void _bindruns() {
 		viewmodels.clear();
-		orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.distance);
+		selectedDistance = "";
+		//todo pass property as param
+		if(selectedOrder == 0){
+			orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.distance);
+		}else if(selectedOrder == 1){
+			orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.run.date.month.toString());
+		}
 	}
-	
+		
 	void _bindActiveResults() {
 		activeResults.clear();
 

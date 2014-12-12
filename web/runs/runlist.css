@@ -3,7 +3,21 @@ paper-item::shadow #ripple {
 		color: #3367d6;
 }
 
-.core-selected {
+paper-tabs::shadow #selectionBar {
+  background-color: #ff4081;
+}
+
+paper-tabs paper-tab::shadow #ink {
+  color: #ff4081;
+}
+
+paper-tabs {
+		width: 200px;
+		margin: 1em;
+}
+
+
+core-selector .core-selected {
   background: #eee;
   color: #4285f4;
 }

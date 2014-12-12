@@ -23,7 +23,7 @@ class RunOverview extends PolymerElement {
 	}
 
 	void _updateRunPoints() {
-		if (runlist == null || runlist.selectedDistance == null) {
+		if (runlist == null || runlist.selectedDistance == null || runlist.selectedOrder == 1) {
 			this.runpoints = [];
 		} else {
 			this.runpoints = runs
