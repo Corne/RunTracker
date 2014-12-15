@@ -22,9 +22,9 @@
   			
 					
 		<div class="container">
-			<core-selector class="statistics" valueattr="label" selected="{{selectedDistance}}">
+			<core-selector class="statistics" valueattr="value" selected="{{selectedDistance}}">
 				<template repeat="{{distance in viewmodels.keys | sort}}">
-					<paper-item label="{{distance}}"></paper-item>
+					<paper-item value="{{distance}}">{{distance}}</paper-item>
 				</template>
 			</core-selector>		
 				<!-- 
@@ -43,8 +43,8 @@
 
 		</div>
 	
-	  <paper-button class="colored" label="add" on-click="{{testClick}}"></paper-button>
-		<paper-button class="colored" label="add" on-click="{{buttonClick}}" raisedButton></paper-button>
+	  <paper-button class="colored" on-click="{{testClick}}">Add</paper-button>
+		<paper-button class="colored" on-click="{{buttonClick}}" raised>Add</paper-button>
 		
 		<add-run-dialog open="{{showDialog}}" defaultdistance="{{selectedDistance}}">
 		</add-run-dialog>

@@ -27,8 +27,8 @@
 				<paper-input type="date" value="{{date}}"></paper-input>
 			</div>
 			
-      <paper-button label="Cancel" dismissive></paper-button>
-      <paper-button label="Save" autofocus affirmative disabled?="{{!validInput}}" on-click="{{createRun}}"></paper-button>
+      <paper-button dismissive>Cancel</paper-button>
+      <paper-button autofocus affirmative disabled?="{{!validInput}}" on-click="{{createRun}}">Save</paper-button>
 		</paper-dialog>
 		
 		<script type="application/dart" src="add_run_dialog.dart" ></script>
