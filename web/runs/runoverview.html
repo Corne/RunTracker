@@ -19,7 +19,9 @@
 				</template>
 			</div>
 			
-			<line-graph style="width: 500px; height: 500px" points="{{runpoints}}"></line-graph>
+			<template bind if="{{runlist.selectedOrder == 0}}">
+				<line-graph style="width: 500px; height: 500px" points="{{runpoints}}"></line-graph>
+			</template>
 		</div>
 	</template>
 	<script type="application/dart" src="runoverview.dart" ></script>
