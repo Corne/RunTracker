@@ -26,6 +26,7 @@ class RunList extends PolymerElement {
 		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
 		onPropertyChange(this, #selectedDistance, _bindActiveResults);
 	
+		onPropertyChange(this, #selectedOrder, () => selectedDistance = "");
 		onPropertyChange(this, #selectedOrder, _bindruns);
 	}
 	
@@ -36,7 +37,6 @@ class RunList extends PolymerElement {
 		
 	void _bindruns() {
 		viewmodels.clear();
-		selectedDistance = "";
 		//todo pass property as param
 		if(selectedOrder == 0){
 			orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.distance);

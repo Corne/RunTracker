@@ -24,6 +24,13 @@ class Run {
 		}
 	}
 	
+	Run.fromJSONMap(Map json) {
+		this._id = json["id"];
+		//todo validation
+		this._result = new Timespan.fromTotalSeconds(json["result"]);
+		this._distance = new Distance(double.parse(json["distance"].toString()));
+	}
+	
 	double getAverageSpeed() {
 		return _distance.kilometers / _result.totalHours();
 	}
@@ -31,9 +38,14 @@ class Run {
 	double getAverageKilometerTime() {
 		return _result.totalMinutes() / _distance.kilometers;
 	}
+	
+	@override toString() {
+		return "Run instance -> Id: $id, result: $result, distance: $distance, date: $date";
+	}
 }
 
 
+//todo refactor to meters as base?
 class Distance {
 	double _kilometers;
 	
@@ -42,7 +54,7 @@ class Distance {
 	Distance(double kilometers){
 		this._kilometers = kilometers;
 	}
-
+		
 	@override toString() {
 		return "$_kilometers km";
 	}

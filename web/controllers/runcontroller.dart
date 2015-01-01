@@ -1,5 +1,7 @@
 library controllers.runcontroller;
 
+import 'dart:convert' show JSON;
+import 'dart:html';
 import '../models/run.dart';
 
 class RunController {
@@ -24,8 +26,20 @@ class RunController {
 	}
 	
 	Iterable<Run> getAll() {
+		//todo use config value
+		String url = "http://localhost:8080/runs/"; 
+		var request = HttpRequest.getString(url).then(onDataLoaded);
 		return _tempruns;
 	}
+	
+  void onDataLoaded(String value) {
+  	print("runs loaded: " + value);
+  	Iterable decoded = JSON.decode(value);
+  	for(Map obj in decoded){
+  		Run run = new Run.fromJSONMap(obj);
+  		print("run: " + run.toString());
+  	}
+  }
 	
 	Run getById(int id){
 		return _tempruns.firstWhere((r) => r.id == id);
@@ -38,4 +52,6 @@ class RunController {
 		
 		return run;
 	}
+  
+
 }
