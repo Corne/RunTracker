@@ -9,23 +9,23 @@ import 'runs/runoverview.dart';
 class RunContent extends PolymerElement {
 	final RunController controller = new RunController();
 	final ObservableList<Run> runs = new ObservableList();
-	
-  @observable int selectedRace;
-  
-  RunOverview overview;
-  
-  RunContent.created() : super.created() {
-  	Iterable<Run> dbRuns = controller.getAll();
-  	this.runs.addAll(dbRuns);
-  }
-  
+
+	@observable int selectedRace;
+
+	RunOverview overview;
+
+	RunContent.created() : super.created() {
+		Iterable<Run> dbRuns = controller.getAll();
+		this.runs.addAll(dbRuns);
+	}
+
 	@override
 	void domReady() {
 		overview = shadowRoot.querySelector("#overview");
 	}
- 
+
 	void addRun(Event e, Object detail, Node sender) {
-		if(detail is Run){
+		if (detail is Run) {
 			runs.add(detail);
 			overview.updateOverview();
 		}
