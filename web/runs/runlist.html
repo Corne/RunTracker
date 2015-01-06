@@ -12,14 +12,13 @@
 		<link rel="stylesheet" href="runlist.css">
 					
 		<paper-tabs selected="{{selectedOrder}}">
-		  <paper-tab>
-		    <span horizontal center-center layout>Distance</span>
-		  </paper-tab>
-		  <paper-tab>
-		    <span horizontal center-center layout>Date</span>
-		  </paper-tab>
+			<paper-tab>
+				<span horizontal center-center layout>Distance</span>
+			</paper-tab>
+			<paper-tab>
+				<span horizontal center-center layout>Date</span>
+			</paper-tab>
 		</paper-tabs>
-  			
 					
 		<div class="container">
 			<core-selector class="statistics" valueattr="value" selected="{{selectedDistance}}">
@@ -27,10 +26,10 @@
 					<paper-item value="{{distance}}">{{distance}}</paper-item>
 				</template>
 			</core-selector>		
-				<!-- 
-					fit attribute needs parent with relative layout:
-				 	https://www.polymer-project.org/docs/polymer/layout-attrs.html 
-				-->
+			<!-- 
+				fit attribute needs parent with relative layout:
+			 	https://www.polymer-project.org/docs/polymer/layout-attrs.html 
+			-->
 			<core-selector class="statistics" selected="{{selectedResult}}">			
 				<template repeat="{{viewmodel in activeResults}}">
 					<div class="runresult" relative>
@@ -43,12 +42,12 @@
 
 		</div>
 	
-	  <paper-button class="colored" on-click="{{testClick}}">Add</paper-button>
+		<paper-button class="colored" on-click="{{testClick}}">Add</paper-button>
 		<paper-button class="colored" on-click="{{buttonClick}}" raised>Add</paper-button>
 		
 		<add-run-dialog open="{{showDialog}}" defaultdistance="{{selectedDistance}}">
 		</add-run-dialog>
 	
-		<script type="application/dart" src="runlist.dart" ></script>
 	</template>
+	<script type="application/dart" src="runlist.dart" ></script>
 </polymer-element>

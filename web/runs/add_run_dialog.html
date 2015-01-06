@@ -11,26 +11,25 @@
 	
 		<paper-dialog heading="Create Run" opened="{{open}}" 
 									transition="paper-dialog-transition-bottom" 
-									autoCloseDisabled="true">
-      
-      <div id="time">
-		<paper-input label="hours" type="number" value="{{hours}}" min="0" max="24"></paper-input>
-		<paper-input label="minutes" type="number" value="{{minutes}}" min="0" max="60"></paper-input>
-		<paper-input label="seconds" type="number" value="{{seconds}}" min="0" max="60"></paper-input>
-	</div>
-	
-	<div id="distance">
-		<paper-input label="distance" type="number" value="{{distance}}" step="0.1"></paper-input>
-	</div>
-	
-	<div id="date">
-		<paper-input type="date" value="{{date}}"></paper-input>
-	</div> 
+									autoCloseDisabled="true"> 
+			<div id="time">
+				<paper-input label="hours" type="number" value="{{hours}}" min="0" max="24"></paper-input>
+				<paper-input label="minutes" type="number" value="{{minutes}}" min="0" max="60"></paper-input>
+				<paper-input label="seconds" type="number" value="{{seconds}}" min="0" max="60"></paper-input>
+			</div>
 			
-      <paper-button dismissive>Cancel</paper-button>
-      <paper-button autofocus affirmative disabled?="{{!validInput}}" on-click="{{createRun}}">Save</paper-button>
+			<div id="distance">
+				<paper-input label="distance" type="number" value="{{distance}}" step="0.1"></paper-input>
+			</div>
+			
+			<div id="date">
+				<paper-input type="date" value="{{date}}"></paper-input>
+			</div> 
+			
+			<paper-button dismissive>Cancel</paper-button>
+			<paper-button autofocus affirmative disabled?="{{!validInput}}" on-click="{{createRun}}">Save</paper-button>
 		</paper-dialog>
-		
-		<script type="application/dart" src="add_run_dialog.dart" ></script>
+				
 	</template>
+	<script type="application/dart" src="add_run_dialog.dart" ></script>
 </polymer-element>
