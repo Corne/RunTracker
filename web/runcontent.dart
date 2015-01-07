@@ -15,8 +15,13 @@ class RunContent extends PolymerElement {
 	RunOverview overview;
 
 	RunContent.created() : super.created() {
-		Iterable<Run> dbRuns = controller.getAll();
-		this.runs.addAll(dbRuns);
+		controller.getAll()
+				.then(onRunsLoaded);		
+	}
+	
+	void onRunsLoaded(Iterable<Run> data) {
+		this.runs.addAll(data);
+		overview.updateOverview();
 	}
 
 	@override

@@ -1,5 +1,6 @@
 library controllers.runcontroller;
 
+import 'dart:async';
 import 'dart:convert' show JSON;
 import 'dart:html';
 import '../models/run.dart';
@@ -25,22 +26,32 @@ class RunController {
 		_tempruns.addAll([run1, run2, run3]);
 	}
 	
-	Iterable<Run> getAll() {
+	Future<Iterable<Run>> getAll() async {
+		try {
 		//todo use config value
-		String url = "http://localhost:8080/runs/"; 
-		var request = HttpRequest.getString(url).then(onDataLoaded);
-		return _tempruns;
+			String url = "http://localhost:8080/runs/";
+			String result = await HttpRequest.getString(url);
+			return decodeRuns(result);
+		}catch(ex){
+			print("error on loading runs" + ex.toString());
+			return _tempruns;
+		}
 	}
 	
-  void onDataLoaded(String value) {
+  Iterable<Run> decodeRuns(String value) {
   	print("runs loaded: " + value);
   	Iterable decoded = JSON.decode(value);
+  	
+  	List<Run> runs = new List();
   	for(Map obj in decoded){
   		Run run = new Run.fromJSONMap(obj);
-  		print("run: " + run.toString());
+  		runs.add(run);
   	}
+  	
+  	return runs;
   }
-	
+  
+  	
 	Run getById(int id){
 		return _tempruns.firstWhere((r) => r.id == id);
 	}

@@ -29,6 +29,9 @@ class Run {
 		//todo validation
 		this._result = new Timespan.fromTotalSeconds(json["result"]);
 		this._distance = new Distance(double.parse(json["distance"].toString()));
+		
+		//temp
+		this._date = new DateTime.now();
 	}
 	
 	double getAverageSpeed() {
