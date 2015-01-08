@@ -29,9 +29,8 @@ class Run {
 		//todo validation
 		this._result = new Timespan.fromTotalSeconds(json["result"]);
 		this._distance = new Distance(double.parse(json["distance"].toString()));
-		
-		//temp
-		this._date = new DateTime.now();
+		//we have nano's since epoch, so divide by 1000000, todo change on server?
+		this._date = new DateTime.fromMillisecondsSinceEpoch((json["date"] / 1000000).round()); 
 	}
 	
 	double getAverageSpeed() {
