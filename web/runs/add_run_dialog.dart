@@ -39,9 +39,11 @@ class AddRunDialog extends PolymerElement {
 
 	void createRun() {
 		var controller = new RunController();
-		Run added = controller.create(_getTimeSpan(), _getDistance(), date: _getDateTime());
-
-		dispatchEvent(new CustomEvent("runadded", detail: added));
+		controller.create(_getTimeSpan(), _getDistance(), date: _getDateTime()).then(_onRunResult);
+	}
+	
+	void _onRunResult(Run run) {
+		dispatchEvent(new CustomEvent("runadded", detail: run));
 	}
 
 	@ComputedProperty('minutes.isNotEmpty && seconds.isNotEmpty')

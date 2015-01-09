@@ -7,6 +7,8 @@ import '../models/run.dart';
 
 class RunController {
 	final List<Run> _tempruns = new List<Run>();
+	//todo use config value (for localhost and port)
+	static const String URL = "http://localhost:8090/runs/";
 	
 	RunController() {
 		//test data
@@ -28,9 +30,7 @@ class RunController {
 	
 	Future<Iterable<Run>> getAll() async {
 		try {
-			//todo use config value
-			String url = "http://localhost:8090/runs/";
-			String result = await HttpRequest.getString(url);
+			String result = await HttpRequest.getString(URL);
 			return decodeRuns(result);
 		} catch(ex) {
 			print("error on loading runs" + ex.toString());
@@ -56,13 +56,23 @@ class RunController {
 		return _tempruns.firstWhere((r) => r.id == id);
 	}
 	
-	Run create(Timespan timespan, Distance distance, {DateTime date}){
-		int id = _tempruns.last.id + 1;
-		Run run = new Run(id, timespan, distance, date: date);
-		_tempruns.add(run);
+	Future<Run> create(Timespan result, Distance distance, {DateTime date}) async {	
+		Run run = new Run(0, result, distance, date: date);
+		String json = run.toJSON();
 		
-		return run;
+		try {
+			HttpRequest request = await HttpRequest.request(URL, method: "POST", sendData: json);
+			Map data = JSON.decode(request.response);
+			return new Run.fromJSONMap(data);
+		} catch(ex) {
+			_tempruns.add(run);
+			return run;
+		}
 	}
   
 
+  
+  onValue(HttpRequest value) {
+  	print("onvalue: " + value.response.toString());
+  }
 }

@@ -1,6 +1,7 @@
 library models.run;
 
 import 'package:intl/intl.dart' show DateFormat;
+import 'dart:convert' show JSON;
 
 class Run {
 	int _id;
@@ -31,6 +32,18 @@ class Run {
 		this._distance = new Distance(double.parse(json["distance"].toString()));
 		//we have nano's since epoch, so divide by 1000000, todo change on server?
 		this._date = new DateTime.fromMillisecondsSinceEpoch((json["date"] / 1000000).round()); 
+	}
+	
+	//todo look at http://stackoverflow.com/questions/20024298/add-json-serializer-to-every-model-class for easier encoding
+	String toJSON() {
+		Map map = new Map();
+		
+		map["id"] = id;
+		map["result"] = result.totalSeconds();
+		map["distance"] = distance.kilometers;
+		map["date"] = date.millisecondsSinceEpoch * 1000000;
+		
+		return JSON.encode(map);
 	}
 	
 	double getAverageSpeed() {
