@@ -69,10 +69,4 @@ class RunController {
 			return run;
 		}
 	}
-  
-
-  
-  onValue(HttpRequest value) {
-  	print("onvalue: " + value.response.toString());
-  }
 }
