@@ -39,7 +39,6 @@ class RunController {
 	}
 	
   Iterable<Run> decodeRuns(String value) {
-  	print("runs loaded: " + value);
   	Iterable decoded = JSON.decode(value);
   	
   	List<Run> runs = new List();

@@ -1,6 +1,5 @@
 library runlist;
 
-import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import '../models/run.dart';
@@ -10,41 +9,40 @@ class RunList extends PolymerElement {
 
 	final ObservableMap<String, List<RunViewModel>> viewmodels = new ObservableMap();
 	final ObservableList<RunViewModel> activeResults = new ObservableList();
-	
+
 	@published Iterable<Run> runs;
-	
+
 	@observable int selectedResult;
 	@observable String selectedDistance = "";
-	
+	//todo use enum (still experimental)
 	@observable int selectedOrder = 0;
 
 	RunList.created()
 			: super.created() {
-
 		onPropertyChange(this, #runs, _bindruns);
 
 		onPropertyChange(this, #selectedDistance, () => selectedResult = null);
 		onPropertyChange(this, #selectedDistance, _bindActiveResults);
-	
+
 		onPropertyChange(this, #selectedOrder, () => selectedDistance = "");
 		onPropertyChange(this, #selectedOrder, _bindruns);
 	}
-	
+
 	void update() {
 		_bindruns();
 		_bindActiveResults();
 	}
-		
+
 	void _bindruns() {
 		viewmodels.clear();
 		//todo pass property as param
-		if(selectedOrder == 0){
-			orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.distance);
-		}else if(selectedOrder == 1){
-			orderViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.run.date.month.toString());
+		if (selectedOrder == 0) {
+			groupViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.distance);
+		} else if (selectedOrder == 1) {
+			groupViewModels(runs.map((r) => new RunViewModel(r)), (e) => e.run.date.month.toString());
 		}
 	}
-		
+
 	void _bindActiveResults() {
 		activeResults.clear();
 
@@ -73,7 +71,7 @@ class RunList extends PolymerElement {
 		return data.map((e) => property(e)).reduce((value, element) => value + element);
 	}
 
-	void orderViewModels(Iterable<RunViewModel> data, String property(RunViewModel el)) {
+	void groupViewModels(Iterable<RunViewModel> data, String property(RunViewModel el)) {
 		var keys = data.map((e) => property(e)).toSet();
 		for (String key in keys) {
 			viewmodels[key] = toObservable(data.where((e) => property(e) == key));
@@ -93,25 +91,16 @@ class RunList extends PolymerElement {
 			viewmodels[run.distance.toString()] = toObservable([]);
 		}
 		viewmodels[run.distance.toString()].add(new RunViewModel(run));
-		
+
 		_bindActiveResults();
 	}
 
 	Iterable<String> sort(Iterable<String> values) {
 		return values.toList()..sort();
 	}
-	
-	//todo move / refactor?
-	@observable bool showDialog = false;  
-	void testClick() {
-		Timespan time = new Timespan(hours: 0, minutes: 29, seconds: 6);
-		Distance distance = new Distance(6.5);
-		Run run = new Run(999, time, distance);
-		
-		dispatchEvent(new CustomEvent("runadded", detail: run));
-	}
-	
-	void buttonClick() {
+
+	@observable bool showDialog = false;
+	void addNewRun() {
 		showDialog = true;
 	}
 }
@@ -120,20 +109,18 @@ class RunViewModel {
 	static final DateFormat _format = new DateFormat("dd-MM-yyyy");
 
 	final String _description;
-	
+
 	Run run;
 
 	String get result => this.run.result.toString();
 	String get distance => this.run.distance.toString();
 	String get description => _description;
 
-	RunViewModel(Run run) : 
-		_description = _format.format(run.date) {
-		this.run = run;	
+	RunViewModel(Run run) : _description = _format.format(run.date) {
+		this.run = run;
 	}
-	
-	RunViewModel.customdescription(Run run, String description) : 
-		_description = description {
+
+	RunViewModel.customdescription(Run run, String description) : _description = description {
 		this.run = run;
 	}
 }
