@@ -31,6 +31,7 @@ class RunController {
 	Future<Iterable<Run>> getAll() async {
 		try {
 			String result = await HttpRequest.getString(URL);
+			print("runs: " + result);
 			return decodeRuns(result);
 		} catch(ex) {
 			print("error on loading runs" + ex.toString());

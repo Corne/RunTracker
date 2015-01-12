@@ -30,8 +30,8 @@ class Run {
 		//todo validation
 		this._result = new Timespan.fromTotalSeconds(json["result"]);
 		this._distance = new Distance(double.parse(json["distance"].toString()));
-		//we have nano's since epoch, so divide by 1000000, todo change on server?
-		this._date = new DateTime.fromMillisecondsSinceEpoch((json["date"] / 1000000).round()); 
+		//server has seconds since epoch so multiply by 1000
+		this._date = new DateTime.fromMillisecondsSinceEpoch((json["date"] * 1000).round()); 
 	}
 	
 	//todo look at http://stackoverflow.com/questions/20024298/add-json-serializer-to-every-model-class for easier encoding
@@ -41,7 +41,7 @@ class Run {
 		map["id"] = id;
 		map["result"] = result.totalSeconds();
 		map["distance"] = distance.kilometers;
-		map["date"] = date.millisecondsSinceEpoch * 1000000;
+		map["date"] = date.millisecondsSinceEpoch / 1000;
 		
 		return JSON.encode(map);
 	}
