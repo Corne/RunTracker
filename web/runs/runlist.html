@@ -22,7 +22,7 @@
 					
 		<div class="container">
 			<core-selector class="statistics" valueattr="value" selected="{{selectedDistance}}">
-				<template repeat="{{distance in viewmodels.keys | sort}}">
+				<template repeat="{{distance in groupedRuns.keys | sort}}">
 					<paper-item value="{{distance}}">{{distance}}</paper-item>
 				</template>
 			</core-selector>		

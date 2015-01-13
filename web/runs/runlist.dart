@@ -7,7 +7,7 @@ import '../models/run.dart';
 @CustomTag('run-list')
 class RunList extends PolymerElement {
 
-	final ObservableMap<Object, List<Run>> _groupedRuns = new ObservableMap();
+	final ObservableMap<String, List<Run>> groupedRuns = new ObservableMap();
 	final ObservableList<RunViewModel> activeResults = new ObservableList();
 
 	@published Iterable<Run> runs;
@@ -35,7 +35,7 @@ class RunList extends PolymerElement {
 	}
 
 	void _bindruns() {
-		_groupedRuns.clear();
+		groupedRuns.clear();
 		//todo pass property as param
 		if (selectedOrder == 0) {
 			groupViewModels(runs, (e) => e.distance.kilometers.toString());
@@ -50,7 +50,7 @@ class RunList extends PolymerElement {
 		if (selectedDistance.isEmpty) {
 			return;
 		}
-		activeResults.addAll(_groupedRuns[selectedDistance].map((r) => new RunViewModel(r)));
+		activeResults.addAll(groupedRuns[selectedDistance].map((r) => new RunViewModel(r)));
 
 		Iterable<Timespan> results = activeResults.map((vm) => vm.run.result);
 		activeResults.insert(0, getAverageResult(results));
@@ -63,7 +63,7 @@ class RunList extends PolymerElement {
 
 		Timespan timespan = new Timespan.fromTotalSeconds(averageTotal.round());
 
-		Run run = new Run(-1, timespan, _groupedRuns[selectedDistance].first.distance);
+		Run run = new Run(-1, timespan, groupedRuns[selectedDistance].first.distance);
 		return new RunViewModel.customdescription(run, "average");
 	}
 
@@ -71,10 +71,10 @@ class RunList extends PolymerElement {
 		return data.map((e) => property(e)).reduce((value, element) => value + element);
 	}
 
-	void groupViewModels(Iterable<Run> data, Object property(Run el)) {
+	void groupViewModels(Iterable<Run> data, String property(Run el)) {
 		var keys = data.map((e) => property(e)).toSet();
-		for (Object key in keys) {
-			_groupedRuns[key] = toObservable(data.where((e) => property(e) == key));
+		for (String key in keys) {
+			groupedRuns[key] = toObservable(data.where((e) => property(e) == key));
 		}
 	}
 
@@ -87,10 +87,10 @@ class RunList extends PolymerElement {
 	}
 
 	void add(Run run) {
-		if (_groupedRuns.keys.contains(run.distance.toString()) == false) {
-			_groupedRuns[run.distance.toString()] = toObservable([]);
+		if (groupedRuns.keys.contains(run.distance.toString()) == false) {
+			groupedRuns[run.distance.toString()] = toObservable([]);
 		}
-		_groupedRuns[run.distance.toString()].add(run);
+		groupedRuns[run.distance.toString()].add(run);
 
 		_bindActiveResults();
 	}

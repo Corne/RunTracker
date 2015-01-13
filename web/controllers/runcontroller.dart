@@ -65,6 +65,7 @@ class RunController {
 			Map data = JSON.decode(request.response);
 			return new Run.fromJSONMap(data);
 		} catch(ex) {
+			print("create ex:" + ex.toString());
 			_tempruns.add(run);
 			return run;
 		}
