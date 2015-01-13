@@ -7,7 +7,7 @@ import '../models/run.dart';
 @CustomTag('run-list')
 class RunList extends PolymerElement {
 
-	final ObservableMap<Object, List<Run>> viewmodels = new ObservableMap();
+	final ObservableMap<Object, List<Run>> _groupedRuns = new ObservableMap();
 	final ObservableList<RunViewModel> activeResults = new ObservableList();
 
 	@published Iterable<Run> runs;
@@ -35,7 +35,7 @@ class RunList extends PolymerElement {
 	}
 
 	void _bindruns() {
-		viewmodels.clear();
+		_groupedRuns.clear();
 		//todo pass property as param
 		if (selectedOrder == 0) {
 			groupViewModels(runs, (e) => e.distance.kilometers.toString());
@@ -50,7 +50,7 @@ class RunList extends PolymerElement {
 		if (selectedDistance.isEmpty) {
 			return;
 		}
-		activeResults.addAll(viewmodels[selectedDistance].map((r) => new RunViewModel(r)));
+		activeResults.addAll(_groupedRuns[selectedDistance].map((r) => new RunViewModel(r)));
 
 		Iterable<Timespan> results = activeResults.map((vm) => vm.run.result);
 		activeResults.insert(0, getAverageResult(results));
@@ -63,7 +63,7 @@ class RunList extends PolymerElement {
 
 		Timespan timespan = new Timespan.fromTotalSeconds(averageTotal.round());
 
-		Run run = new Run(-1, timespan, viewmodels[selectedDistance].first.distance);
+		Run run = new Run(-1, timespan, _groupedRuns[selectedDistance].first.distance);
 		return new RunViewModel.customdescription(run, "average");
 	}
 
@@ -74,7 +74,7 @@ class RunList extends PolymerElement {
 	void groupViewModels(Iterable<Run> data, Object property(Run el)) {
 		var keys = data.map((e) => property(e)).toSet();
 		for (Object key in keys) {
-			viewmodels[key] = toObservable(data.where((e) => property(e) == key));
+			_groupedRuns[key] = toObservable(data.where((e) => property(e) == key));
 		}
 	}
 
@@ -87,10 +87,10 @@ class RunList extends PolymerElement {
 	}
 
 	void add(Run run) {
-		if (viewmodels.keys.contains(run.distance.toString()) == false) {
-			viewmodels[run.distance.toString()] = toObservable([]);
+		if (_groupedRuns.keys.contains(run.distance.toString()) == false) {
+			_groupedRuns[run.distance.toString()] = toObservable([]);
 		}
-		viewmodels[run.distance.toString()].add(run);
+		_groupedRuns[run.distance.toString()].add(run);
 
 		_bindActiveResults();
 	}
