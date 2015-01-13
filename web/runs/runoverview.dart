@@ -15,7 +15,6 @@ class RunOverview extends PolymerElement {
 	RunOverview.created() : super.created() {
 	}
 
-
 	//todo listen doesn't seem to work, so call update from parent
 	void updateOverview() {
 		_updateRunPoints();
@@ -27,7 +26,7 @@ class RunOverview extends PolymerElement {
 			this.runpoints = [];
 		} else {
 			this.runpoints = runs
-					.where((r) => r.distance.toString() == runlist.selectedDistance)
+					.where((r) => r.distance.kilometers.toString() == runlist.selectedDistance)
 					.map((r) => new RunPoint(r));
 		}
 	}
