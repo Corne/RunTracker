@@ -41,7 +41,7 @@ class Run {
 		map["id"] = id;
 		map["result"] = result.totalSeconds();
 		map["distance"] = distance.kilometers;
-		map["date"] = date.millisecondsSinceEpoch / 1000;
+		map["date"] = (date.millisecondsSinceEpoch / 1000).round();
 		
 		return JSON.encode(map);
 	}
