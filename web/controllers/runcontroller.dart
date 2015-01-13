@@ -56,18 +56,19 @@ class RunController {
 		return _tempruns.firstWhere((r) => r.id == id);
 	}
 	
-	Future<Run> create(Timespan result, Distance distance, {DateTime date}) async {	
+	Future<Run> create(Timespan result, Distance distance, {DateTime date}) {	
 		Run run = new Run(0, result, distance, date: date);
 		String json = run.toJSON();
 		
 		try {
-			HttpRequest request = await HttpRequest.request(URL, method: "POST", sendData: json);
-			Map data = JSON.decode(request.response);
-			return new Run.fromJSONMap(data);
+			return HttpRequest.request(URL, method: "POST", sendData: json).then((request) { 		
+					Map data = JSON.decode(request.response);
+					return new Run.fromJSONMap(data);
+  			});
 		} catch(ex) {
 			print("create ex:" + ex.toString());
-			_tempruns.add(run);
-			return run;
+			return null;
 		}
 	}
+	
 }
