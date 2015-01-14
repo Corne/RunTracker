@@ -19,8 +19,8 @@
 				</template>
 			</div>
 			
-			<template bind if="{{runlist.selectedOrder == 0}}">
-				<line-graph style="width: 500px; height: 500px" points="{{runpoints}}"></line-graph>
+			<template bind if="{{runlist.selectedOrder == 0 && graphdata != null}}">
+				<line-graph style="width: 500px; height: 500px" graphdata="{{graphdata}}"></line-graph>
 			</template>
 		</div>
 	</template>

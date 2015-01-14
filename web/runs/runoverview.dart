@@ -9,7 +9,8 @@ import 'runpoint.dart';
 class RunOverview extends PolymerElement {
 	@published ObservableList<Run> runs;
 
-	@observable Iterable<RunPoint> runpoints;
+	//@observable Iterable<RunPoint> runpoints;
+	@observable RunGraphData graphdata;
 	@observable RunList runlist;
 
 	RunOverview.created() : super.created() {
@@ -23,11 +24,13 @@ class RunOverview extends PolymerElement {
 
 	void _updateRunPoints() {
 		if (runlist == null || runlist.selectedDistance == null || runlist.selectedOrder == 1) {
-			this.runpoints = [];
+			//this.runpoints = [];
+			this.graphdata = null;
 		} else {
-			this.runpoints = runs
+			Iterable<RunPoint> runpoints = runs
 					.where((r) => r.distance.kilometers.toString() == runlist.selectedDistance)
 					.map((r) => new RunPoint(r));
+			graphdata = new RunGraphData(runpoints);
 		}
 	}
 

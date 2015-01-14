@@ -117,6 +117,10 @@ class Timespan {
 
 	@override toString() {
 		var time = this.toDateTime();
-		return new DateFormat.Hms().format(time);
+		if(this.hours > 0) {
+			return new DateFormat.Hms().format(time);
+		} else {
+			return new DateFormat.ms().format(time);
+		}
 	}
 }
