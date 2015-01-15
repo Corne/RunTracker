@@ -40,7 +40,7 @@ class RunList extends PolymerElement {
 		if (selectedOrder == 0) {
 			groupViewModels(runs, (e) => e.distance.kilometers.toString());
 		} else if (selectedOrder == 1) {
-			groupViewModels(runs, (e) => e.date.month.toString());
+			groupViewModels(runs, (e) => new DateFormat.yMd().format(e.date));
 		}
 	}
 
