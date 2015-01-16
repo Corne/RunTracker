@@ -9,6 +9,13 @@ packages:
     description: args
     source: hosted
     version: "0.12.0+2"
+  async_await:
+    description:
+      ref: null
+      resolved-ref: "8b401a9f2e5e81dca5f70dbe7564112a0823dee6"
+      url: "https://github.com/dart-lang/async_await.git"
+    source: git
+    version: "0.0.0"
   barback:
     description: barback
     source: hosted
