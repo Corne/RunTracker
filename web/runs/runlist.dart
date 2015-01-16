@@ -6,7 +6,8 @@ import '../models/run.dart';
 
 @CustomTag('run-list')
 class RunList extends PolymerElement {
-
+	
+	final DateFormat dayformat = new DateFormat.yMd();
 	final ObservableMap<String, List<Run>> groupedRuns = new ObservableMap();
 	final ObservableList<RunViewModel> activeResults = new ObservableList();
 
@@ -17,6 +18,7 @@ class RunList extends PolymerElement {
 	@observable String selectedDistance = "";
 	//todo use enum (still experimental)
 	@observable int selectedOrder = 0;
+	@observable bool showDialog = false;
 
 	RunList.created()
 			: super.created() {
@@ -37,23 +39,33 @@ class RunList extends PolymerElement {
 	void _bindruns() {
 		groupedRuns.clear();
 		//todo pass property as param
-		if (selectedOrder == 0) {
+		if (selectedOrder == RunGrouping.DISTANCE.index) {
 			groupViewModels(runs, (e) => e.distance.kilometers.toString());
-		} else if (selectedOrder == 1) {
+		} else if (selectedOrder == RunGrouping.DATE.index) {
 			groupViewModels(runs, (e) => new DateFormat.yMd().format(e.date));
 		}
 	}
 
-	void _bindActiveResults() {
+	_bindActiveResults() {
 		activeResults.clear();
-
-		if (selectedDistance.isEmpty) {
+		if (selectedDistance == null || selectedDistance.isEmpty) {
 			return;
 		}
-		activeResults.addAll(groupedRuns[selectedDistance].map((r) => new RunViewModel(r)));
+
+		activeResults.addAll(groupedRuns[selectedDistance].map((r) 
+				=> new RunViewModel.customdescription(r, getDescription(r))));
 
 		Iterable<Timespan> results = activeResults.map((vm) => vm.run.result);
 		activeResults.insert(0, getAverageResult(results));
+	}
+	
+	String getDescription(Run run) {
+		if (selectedOrder == RunGrouping.DISTANCE.index) {
+			return dayformat.format(run.date);
+		} else  if (selectedOrder == RunGrouping.DATE.index) { 
+			return run.distance.toString();
+		}
+		return "OOPS!";
 	}
 
 	//temp solution returning a runvm, so we can use it for details
@@ -99,10 +111,14 @@ class RunList extends PolymerElement {
 		return values.toList()..sort();
 	}
 
-	@observable bool showDialog = false;
 	void addNewRun() {
 		showDialog = true;
 	}
+}
+
+enum RunGrouping {
+	DISTANCE,
+	DATE
 }
 
 class RunViewModel {

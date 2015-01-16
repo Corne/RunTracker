@@ -14,7 +14,7 @@ class RunContent extends PolymerElement {
 
 	RunOverview overview;
 
-	RunContent.created() : super.created() {
+	RunContent.created() : super.created() {	
 		controller.getAll()
 				.then(onRunsLoaded);		
 	}
