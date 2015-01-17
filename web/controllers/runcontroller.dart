@@ -61,10 +61,6 @@ class RunController {
 		String json = run.toJSON();
 		
 		try {
-//			return HttpRequest.request(URL, method: "POST", sendData: json).then((request) { 		
-//					Map data = JSON.decode(request.response);
-//					return new Run.fromJSONMap(data);
-//  			});
 			HttpRequest request = await HttpRequest.request(URL, method: "POST", sendData: json);
 			Map data = JSON.decode(request.response);
 			return new Run.fromJSONMap(data);
