@@ -1,7 +1,7 @@
 library runoverview;
 
 import 'package:polymer/polymer.dart';
-import '../models/run.dart';
+import 'package:runtracker/run.dart';
 import 'runlist.dart';
 import 'runpoint.dart';
 

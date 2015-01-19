@@ -1,7 +1,7 @@
 library runstats;
 
 import 'package:polymer/polymer.dart';
-import '../models/run.dart';
+import 'package:runtracker/run.dart';
 
 @CustomTag('run-stats')
 class RunStats extends PolymerElement {

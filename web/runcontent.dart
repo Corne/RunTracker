@@ -1,7 +1,7 @@
 import 'package:polymer/polymer.dart';
 
 import 'dart:html';
-import 'models/run.dart';
+import 'package:runtracker/run.dart';
 import 'controllers/runcontroller.dart';
 import 'runs/runoverview.dart';
 

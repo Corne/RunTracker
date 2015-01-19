@@ -1,5 +1,5 @@
 import '../views/chartist_wrapper/line_graph.dart';
-import '../models/run.dart';
+import 'package:runtracker/run.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 class RunGraphData extends GraphData {

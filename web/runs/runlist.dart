@@ -2,7 +2,7 @@ library runlist;
 
 import 'package:polymer/polymer.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import '../models/run.dart';
+import 'package:runtracker/run.dart';
 
 @CustomTag('run-list')
 class RunList extends PolymerElement {

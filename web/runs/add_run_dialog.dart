@@ -2,7 +2,7 @@ library rundialog;
 
 import 'package:polymer/polymer.dart';
 import '../controllers/runcontroller.dart';
-import '../models/run.dart';
+import 'package:runtracker/run.dart';
 import 'dart:html';
 
 
