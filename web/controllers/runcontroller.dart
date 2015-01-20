@@ -3,7 +3,7 @@ library controllers.runcontroller;
 import 'dart:async';
 import 'dart:convert' show JSON;
 import 'dart:html';
-import 'package:runtracker/run.dart';
+import 'package:runtracker/run/run.dart';
 
 class RunController {
 	final List<Run> _tempruns = new List<Run>();
