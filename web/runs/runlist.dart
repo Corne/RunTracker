@@ -16,7 +16,6 @@ class RunList extends PolymerElement {
 	@observable int selectedResult;
 	//selected property of core-selector will always be a string
 	@observable String selectedDistance = "";
-	//todo use enum (still experimental)
 	@observable int selectedOrder = 0;
 	@observable bool showDialog = false;
 
